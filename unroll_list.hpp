@@ -18,13 +18,19 @@ template<typename T> class Node {
 
 template<typename T> class Ulist {
  private:
-  int size;
+  int max_elem;
   Node<T> *head;
 
  public:
-  Ulist(int size);
-  void insert(T data);
-  void remove(T data);
+  Ulist(int max_elem);
+  void push_back(T data);
+  void pop_back();
+  void push_front(T data);
+  void pop_front();
+  T &front();
+  T &back();
+  int size();
+  bool empty();
 };
 
 #endif

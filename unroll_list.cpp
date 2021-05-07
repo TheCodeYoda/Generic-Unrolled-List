@@ -14,9 +14,9 @@ Template NodeT::Node(int size)
   this->prev = nullptr;
 }
 
-Template UlistT::Ulist(int size)
+Template UlistT::Ulist(int max_elem)
 {
-  this->size = size;
+  this->max_elem = max_elem;
   this->head = nullptr;
 }
 
