@@ -52,7 +52,41 @@ Template void UlistT::pop_back()
       return;
     }
     (this->tail->totelem)--;
+    if (this->tail->totelem == 0) {
+      NodeT *garbage = this->tail;
+      this->tail = this->tail->prev;
+      delete garbage;
+    }
   }
+}
+
+Template void UlistT::push_front(T data)
+{
+  // TODO
+}
+
+Template void UlistT::pop_front()
+{
+  // TODO
+}
+
+Template int UlistT::size()
+{
+  NodeT *temp = this->head;
+  int count = 0;
+  while (temp) {
+    count += temp->totelem;
+    temp = temp->next;
+  }
+  return count;
+}
+
+Template bool UlistT::empty()
+{
+  if ((*this).size()) {
+    return false;
+  }
+  return true;
 }
 
 Template void UlistT::display()
@@ -85,9 +119,12 @@ int main()
   for (int i = 1; i < 11; i++) {
     u.push_back(i);
   }
-  u.pop_back();
-  u.pop_back();
-  u.push_back(100);
   u.display();
-  u.display_reverse();
+  for (int i = 0; i < 5; i++) {
+    u.pop_back();
+  }
+  u.display();
+  // u.display_reverse();
+
+  cout << u.size() << " " << u.empty();
 }
