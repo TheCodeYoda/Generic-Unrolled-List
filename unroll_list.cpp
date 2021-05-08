@@ -198,6 +198,30 @@ Template typename UlistT::Iterator UlistT::Iterator::operator++(int)
   return temp;
 }
 
+Template typename UlistT::Iterator &UlistT::Iterator::operator--()
+{
+  if (n == 0) {
+    this->ptr = this->ptr->prev;
+    if (this->ptr) {
+      this->n = (this->ptr->totelem) - 1;
+    }
+    else {
+      this->n = 0;
+    }
+  }
+  else {
+    --(this->n);
+  }
+  return (*this);
+}
+
+Template typename UlistT::Iterator UlistT::Iterator::operator--(int)
+{
+  Iterator temp = *this;
+  --(*this);
+  return temp;
+}
+
 Template T UlistT::Iterator::operator*()
 {
   return this->ptr->v[this->n];
@@ -213,11 +237,21 @@ Template typename UlistT::Iterator UlistT::end()
   return Iterator(this->tail->next, 0);
 }
 
+Template typename UlistT::Iterator UlistT::rbegin()
+{
+  return Iterator(this->tail, (this->tail->totelem) - 1);
+}
+
+Template typename UlistT::Iterator UlistT::rend()
+{
+  return Iterator(this->head->prev, 0);
+}
+
 template<typename ptr_t> void disp(ptr_t first, ptr_t last)
 {
   while (first != last) {
     cout << *first << " ";
-    ++first;
+    --first;
   }
 }
 
@@ -239,7 +273,7 @@ int main()
   u.display();
 
   cout << "\n\n";
-  disp(u.begin(), u.end());
+  disp(u.rbegin(), u.rend());
 
   // int size = u.size();
   // for (int i = 0; i < size; i++) {

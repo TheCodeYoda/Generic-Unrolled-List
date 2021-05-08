@@ -30,6 +30,8 @@ template<typename T> class Ulist {
     Iterator(Node<T> *ptr_, int n_);
     Iterator &operator++();
     Iterator operator++(int);
+    Iterator &operator--();
+    Iterator operator--(int);
     bool operator==(const Iterator &rhs);
     bool operator!=(const Iterator &rhs);
     T operator*();
