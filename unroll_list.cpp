@@ -178,5 +178,5 @@ int main()
   }
   u.display();
 
-  cout << u.size() << " " << u.empty();
+  cout << u.size() << " " << u.empty() << endl;
 }
