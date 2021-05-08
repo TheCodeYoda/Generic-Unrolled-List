@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 #include "unroll_list.hpp"
 
@@ -274,6 +275,9 @@ int main()
 
   cout << "\n\n";
   disp(u.rbegin(), u.rend());
+  cout << endl;
+
+  // cout << *find(u.begin(), u.end(), 8) << "found\n";
 
   // int size = u.size();
   // for (int i = 0; i < size; i++) {
