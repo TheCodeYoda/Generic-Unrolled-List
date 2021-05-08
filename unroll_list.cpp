@@ -31,7 +31,7 @@ Template void UlistT::push_back(T data)
   }
   else {
     if (this->tail->totelem == this->max_elem) {
-      Node<T> *newNode = new Node<T>(this->max_elem);
+      NodeT *newNode = new Node<T>(this->max_elem);
       newNode->v[0] = data;
       (newNode->totelem)++;
       this->tail->next = newNode;
@@ -55,6 +55,9 @@ Template void UlistT::pop_back()
     if (this->tail->totelem == 0) {
       NodeT *garbage = this->tail;
       this->tail = this->tail->prev;
+      if (this->tail) {
+        this->tail->next = nullptr;
+      }
       delete garbage;
     }
   }
@@ -62,7 +65,29 @@ Template void UlistT::pop_back()
 
 Template void UlistT::push_front(T data)
 {
-  // TODO
+  if (this->head == nullptr) {
+    this->head = new NodeT(this->max_elem);
+    this->head->v[0] = data;
+    (this->head->totelem)++;
+    this->tail = this->head;
+  }
+  else {
+    if (this->head->totelem == this->max_elem) {
+      NodeT *newNode = new NodeT(this->max_elem);
+      newNode->v[0] = data;
+      (newNode->totelem)++;
+      newNode->next = this->head;
+      this->head->prev = newNode;
+      this->head = newNode;
+    }
+    else {
+      for (int i = this->head->totelem; i > 0; i--) {
+        this->head->v[i] = this->head->v[i - 1];
+      }
+      this->head->v[0] = data;
+      (this->head->totelem)++;
+    }
+  }
 }
 
 Template void UlistT::pop_front()
@@ -124,7 +149,12 @@ int main()
     u.pop_back();
   }
   u.display();
-  // u.display_reverse();
 
-  cout << u.size() << " " << u.empty();
+  u.push_front(6);
+  u.push_front(7);
+  u.push_front(8);
+  // u.display_reverse();
+  u.display();
+
+  // cout << u.size() << " " << u.empty();
 }
