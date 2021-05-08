@@ -23,7 +23,7 @@ template<typename T> class Ulist {
  public:
   Ulist(int max_elem);
   void push_back(T data);
-  T pop_back();
+  void pop_back();
   void push_front(T data);
   void pop_front();
   T &front();
@@ -31,6 +31,7 @@ template<typename T> class Ulist {
   int size();
   bool empty();
   void display();
+  void display_reverse();
 };
 
 #endif

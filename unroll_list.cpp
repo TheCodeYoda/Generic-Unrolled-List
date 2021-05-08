@@ -35,6 +35,7 @@ Template void UlistT::push_back(T data)
       newNode->v[0] = data;
       (newNode->totelem)++;
       this->tail->next = newNode;
+      newNode->prev = this->tail;
       this->tail = newNode;
     }
     else {
@@ -44,23 +45,49 @@ Template void UlistT::push_back(T data)
   }
 }
 
+Template void UlistT::pop_back()
+{
+  if (this->head) {
+    if (this->tail->totelem == 0) {
+      return;
+    }
+    (this->tail->totelem)--;
+  }
+}
+
 Template void UlistT::display()
 {
   Node<T> *temp = this->head;
   while (temp) {
-    for (auto i : temp->v) {
-      cout << i << " ";
+    for (size_t i = 0; i < temp->totelem; i++) {
+      cout << temp->v[i] << " ";
     }
     cout << "\n";
     temp = temp->next;
   }
 }
 
+Template void UlistT::display_reverse()
+{
+  Node<T> *temp = this->tail;
+  while (temp) {
+    for (int i = (temp->totelem) - 1; i > -1; i--) {
+      cout << temp->v[i] << " ";
+    }
+    cout << "\n";
+    temp = temp->prev;
+  }
+}
+
 int main()
 {
   Ulist<int> u(5);
-  u.push_back(1);
-  u.push_back(2);
-  u.push_back(3);
+  for (int i = 1; i < 11; i++) {
+    u.push_back(i);
+  }
+  u.pop_back();
+  u.pop_back();
+  u.push_back(100);
   u.display();
+  u.display_reverse();
 }
