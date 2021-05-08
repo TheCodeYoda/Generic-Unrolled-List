@@ -92,7 +92,23 @@ Template void UlistT::push_front(T data)
 
 Template void UlistT::pop_front()
 {
-  // TODO
+  if (this->head) {
+    if (this->tail->totelem == 0) {
+      return;
+    }
+    for (int i = 0; i < (this->head->totelem) - 1; i++) {
+      this->head->v[i] = this->head->v[i + 1];
+    }
+    (this->head->totelem)--;
+    if (this->head->totelem == 0) {
+      NodeT *garbage = this->head;
+      this->head = this->head->next;
+      if (this->head) {
+        this->head->prev = nullptr;
+      }
+      delete garbage;
+    }
+  }
 }
 
 Template int UlistT::size()
@@ -144,7 +160,6 @@ int main()
   for (int i = 1; i < 11; i++) {
     u.push_back(i);
   }
-  u.display();
   for (int i = 0; i < 5; i++) {
     u.pop_back();
   }
@@ -156,5 +171,12 @@ int main()
   // u.display_reverse();
   u.display();
 
-  // cout << u.size() << " " << u.empty();
+  int size = u.size();
+  for (int i = 0; i < size; i++) {
+    u.pop_front();
+    u.display();
+  }
+  u.display();
+
+  cout << u.size() << " " << u.empty();
 }
