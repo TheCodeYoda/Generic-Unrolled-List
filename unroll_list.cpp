@@ -5,6 +5,7 @@
 #define Template template<typename T>
 #define NodeT Node<T>
 #define UlistT Ulist<T>
+#define IteratorT Iterator<T>
 
 Template NodeT::Node(int size)
 {
@@ -154,6 +155,72 @@ Template void UlistT::display_reverse()
   }
 }
 
+// Iterator stuff.....
+
+Template UlistT::Iterator::Iterator(NodeT *ptr_, int n_)
+{
+  this->ptr = ptr_;
+  this->n = n_;
+}
+
+Template bool UlistT::Iterator::operator==(const UlistT::Iterator &rhs)
+{
+  if ((this->ptr == rhs.ptr) && (this->n = rhs.n)) {
+    return true;
+  }
+  return false;
+}
+
+Template bool UlistT::Iterator::operator!=(const UlistT::Iterator &rhs)
+{
+  if ((this->ptr != rhs.ptr) || (this->n != rhs.n)) {
+    return true;
+  }
+  return false;
+}
+
+Template typename UlistT::Iterator &UlistT::Iterator::operator++()
+{
+  if (n == (this->ptr->totelem - 1)) {
+    this->ptr = this->ptr->next;
+    this->n = 0;
+  }
+  else {
+    ++(this->n);
+  }
+  return (*this);
+}
+
+Template typename UlistT::Iterator UlistT::Iterator::operator++(int)
+{
+  Iterator temp = *this;
+  ++(*this);
+  return temp;
+}
+
+Template T UlistT::Iterator::operator*()
+{
+  return this->ptr->v[this->n];
+}
+
+Template typename UlistT::Iterator UlistT::begin()
+{
+  return Iterator(this->head, 0);
+}
+
+Template typename UlistT::Iterator UlistT::end()
+{
+  return Iterator(this->tail->next, 0);
+}
+
+template<typename ptr_t> void disp(ptr_t first, ptr_t last)
+{
+  while (first != last) {
+    cout << *first << " ";
+    ++first;
+  }
+}
+
 int main()
 {
   Ulist<int> u(5);
@@ -171,12 +238,15 @@ int main()
   // u.display_reverse();
   u.display();
 
-  int size = u.size();
-  for (int i = 0; i < size; i++) {
-    u.pop_front();
-    u.display();
-  }
-  u.display();
+  cout << "\n\n";
+  disp(u.begin(), u.end());
 
-  cout << u.size() << " " << u.empty() << endl;
+  // int size = u.size();
+  // for (int i = 0; i < size; i++) {
+  //   u.pop_front();
+  //   u.display();
+  // }
+  // u.display();
+
+  // cout << u.size() << " " << u.empty() << endl;
 }

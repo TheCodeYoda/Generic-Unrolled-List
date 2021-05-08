@@ -24,8 +24,10 @@ template<typename T> class Ulist {
   class Iterator {
    private:
     Node<T> *ptr;
+    int n;
 
    public:
+    Iterator(Node<T> *ptr_, int n_);
     Iterator &operator++();
     Iterator operator++(int);
     bool operator==(const Iterator &rhs);
