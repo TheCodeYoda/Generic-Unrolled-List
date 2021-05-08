@@ -6,13 +6,11 @@
 using namespace std;
 
 template<typename T> class Node {
- private:
+ public:
   int totelem;
   vector<T> v;
   Node *next;
   Node *prev;
-
- public:
   Node(int size);
 };
 
@@ -20,17 +18,19 @@ template<typename T> class Ulist {
  private:
   int max_elem;
   Node<T> *head;
+  Node<T> *tail;
 
  public:
   Ulist(int max_elem);
   void push_back(T data);
-  void pop_back();
+  T pop_back();
   void push_front(T data);
   void pop_front();
   T &front();
   T &back();
   int size();
   bool empty();
+  void display();
 };
 
 #endif
