@@ -234,6 +234,7 @@ Template typename UlistT::Iterator &UlistT::Iterator::operator--()
 {
   if (this->ptr == nullptr) {
     this->ptr = this->tail;
+    assert(this->tail);
     this->n = (this->ptr->totelem) - 1;
     return (*this);
   }
@@ -282,8 +283,7 @@ Template typename UlistT::Iterator UlistT::rbegin()
 
 Template typename UlistT::Iterator UlistT::rend()
 {
-  assert(this->head);
-  return Iterator(this->head->prev, this->tail, this->head, 0);
+  return Iterator(nullptr, this->tail, this->head, 0);
 }
 
 template<typename ptr_t> void disp(ptr_t first, ptr_t last)
