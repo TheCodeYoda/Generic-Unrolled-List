@@ -158,11 +158,12 @@ Template void UlistT::display_reverse()
 
 // Iterator stuff.....
 
-Template UlistT::Iterator::Iterator(NodeT *ptr_, NodeT *tail_, int n_)
+Template UlistT::Iterator::Iterator(NodeT *ptr_, NodeT *tail_, NodeT *head_, int n_)
 {
   this->ptr = ptr_;
-  this->n = n_;
   this->tail = tail_;
+  this->head = head_;
+  this->n = n_;
 }
 
 Template bool UlistT::Iterator::operator==(const UlistT::Iterator &rhs)
@@ -183,6 +184,11 @@ Template bool UlistT::Iterator::operator!=(const UlistT::Iterator &rhs)
 
 Template typename UlistT::Iterator &UlistT::Iterator::operator++()
 {
+  if (this->ptr == nullptr) {
+    this->ptr = this->head;
+    this->n = 0;
+    return *(this);
+  }
   if (n == (this->ptr->totelem - 1)) {
     this->ptr = this->ptr->next;
     this->n = 0;
@@ -236,22 +242,22 @@ Template T &UlistT::Iterator::operator*()
 
 Template typename UlistT::Iterator UlistT::begin()
 {
-  return Iterator(this->head, this->tail, 0);
+  return Iterator(this->head, this->tail, this->head, 0);
 }
 
 Template typename UlistT::Iterator UlistT::end()
 {
-  return Iterator(this->tail->next, this->tail, 0);
+  return Iterator(this->tail->next, this->tail, this->head, 0);
 }
 
 Template typename UlistT::Iterator UlistT::rbegin()
 {
-  return Iterator(this->tail, this->tail, (this->tail->totelem) - 1);
+  return Iterator(this->tail, this->tail, this->head, (this->tail->totelem) - 1);
 }
 
 Template typename UlistT::Iterator UlistT::rend()
 {
-  return Iterator(this->head->prev, this->tail, 0);
+  return Iterator(this->head->prev, this->tail, this->head, 0);
 }
 
 template<typename ptr_t> void disp(ptr_t first, ptr_t last)
@@ -269,11 +275,10 @@ template<typename T> void my_swap(T &x, T &y)
   y = temp;
 }
 
-template<typename ptr_t> void my_reverse(ptr_t first, ptr_t last)
+template<class BidirIt> void my_reverse(BidirIt first, BidirIt last)
 {
-  while (first != last && first != --last) {
-    my_swap(*first, *last);
-    ++first;
+  while ((first != last) && (first != --last)) {
+    std::iter_swap(first++, last);
   }
 }
 
@@ -310,7 +315,7 @@ int main()
 
   cout << "\n\n";
   cout << "\n";
-  reverse(u.begin(), u.end());
+  std::reverse(u.begin(), u.end());
   disp(u.begin(), u.end());
   replace(u.begin(), u.end(), 8, -1);
   cout << endl;

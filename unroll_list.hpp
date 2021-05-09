@@ -26,16 +26,17 @@ template<typename T> class Ulist {
   class Iterator {
    private:
     Node<T> *ptr;
+    Node<T> *head;
     Node<T> *tail;
     int n;
 
    public:
     using iterator_category = std::bidirectional_iterator_tag;
-    using difference_type = std::ptrdiff_t;
+    using difference_type = T;
     using value_type = T;
     using pointer = T *;  // or also value_type*
     using reference = T &;
-    Iterator(Node<T> *ptr_, Node<T> *tail, int n_);
+    Iterator(Node<T> *ptr_, Node<T> *tail, Node<T> *head, int n_);
     Iterator &operator++();
     Iterator operator++(int);
     Iterator &operator--();
