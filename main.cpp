@@ -13,7 +13,7 @@ void assert_str(bool val, const string &str)
   assert(false);
 }
 
-template<typename T> void assert_ulist(Ulist<T> &ulist, list<T> &list, const string &str = "")
+template<typename T> void assert_eq_ulist(Ulist<T> &ulist, list<T> &list, const string &str = "")
 {
   assert_str(ulist.size() == list.size(), str);
   auto uit = ulist.begin();
@@ -23,16 +23,35 @@ template<typename T> void assert_ulist(Ulist<T> &ulist, list<T> &list, const str
   }
 }
 
+template<typename T> void assert_ne_ulist(Ulist<T> &ulist, list<T> &list, const string &str = "")
+{
+  if (ulist.size() == list.size()) {
+    auto uit = ulist.begin();
+    auto it = list.begin();
+    bool equal = true;
+    for (; uit != ulist.end(); uit++, it++) {
+      if (*uit != *it) {
+        equal = false;
+        break;
+      }
+    }
+    assert_str(equal == false, str);
+  }
+}
+
 int main()
 {
   {
     Ulist<int> u(5);
     list<int> l;
+    list<int> l2;
     for (int i = 1; i < 11; i++) {
       u.push_back(i);
       l.push_back(i);
+      l2.push_back(i + 1);
     }
-    assert_ulist(u, l, "push_back()");
+    assert_eq_ulist(u, l, "push_back()");
+    assert_ne_ulist(u, l2, "push_back()");
   }
 
   /* for (int i = 0; i < 5; i++) { */
