@@ -2,7 +2,7 @@
 #define UNROLL_LIST_H
 
 #include <vector>
-#include <iterator>  // For std::forward_iterator_tag
+#include <iterator>  // For std::bidirectional_iterator_tag
 #include <cstddef>   // For std::ptrdiff_t
 
 using namespace std;
@@ -41,7 +41,7 @@ template<typename T> class Ulist {
     Iterator operator--(int);
     bool operator==(const Iterator &rhs);
     bool operator!=(const Iterator &rhs);
-    T operator*();
+    T &operator*();
   };
 
   // List interface

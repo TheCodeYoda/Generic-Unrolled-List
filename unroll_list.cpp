@@ -201,6 +201,9 @@ Template typename UlistT::Iterator UlistT::Iterator::operator++(int)
 
 Template typename UlistT::Iterator &UlistT::Iterator::operator--()
 {
+  if (this->ptr == nullptr) {
+    return (*this);
+  }
   if (n == 0) {
     this->ptr = this->ptr->prev;
     if (this->ptr) {
@@ -223,7 +226,7 @@ Template typename UlistT::Iterator UlistT::Iterator::operator--(int)
   return temp;
 }
 
-Template T UlistT::Iterator::operator*()
+Template T &UlistT::Iterator::operator*()
 {
   return this->ptr->v[this->n];
 }
@@ -252,8 +255,31 @@ template<typename ptr_t> void disp(ptr_t first, ptr_t last)
 {
   while (first != last) {
     cout << *first << " ";
-    --first;
+    ++first;
   }
+}
+
+template<typename T> void my_swap(T &x, T &y)
+{
+  T temp = x;
+  x = y;
+  y = temp;
+}
+
+template<typename ptr_t> void my_reverse(ptr_t first, ptr_t last)
+{
+  while (first != last && first != --last) {
+    my_swap(*first, *last);
+    ++first;
+  }
+}
+
+template<typename ptr_t, typename T> ptr_t my_find(ptr_t first, ptr_t last, T t)
+{
+  while (first != last && !(*first == t)) {
+    ++first;
+  }
+  return first;
 }
 
 int main()
@@ -274,10 +300,18 @@ int main()
   u.display();
 
   cout << "\n\n";
-  disp(u.rbegin(), u.rend());
+  disp(u.begin(), u.end());
   cout << endl;
 
   cout << *find(u.begin(), u.end(), 8) << "found\n";
+
+  cout << "\n\n";
+  cout << "\n";
+  reverse(u.begin(), u.rbegin());
+  disp(u.begin(), u.end());
+  replace(u.begin(), u.end(), 8, -1);
+  cout << endl;
+  disp(u.begin(), u.end());
 
   // int size = u.size();
   // for (int i = 0; i < size; i++) {
