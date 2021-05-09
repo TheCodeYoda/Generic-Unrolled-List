@@ -182,12 +182,12 @@ Template void UlistT::display_reverse()
 
 // Iterator stuff.....
 
-Template UlistT::Iterator::Iterator(NodeT *ptr_, NodeT *tail_, NodeT *head_, int n_)
+Template UlistT::Iterator::Iterator(NodeT *ptr, NodeT *tail, NodeT *head, int n)
 {
-  this->ptr = ptr_;
-  this->tail = tail_;
-  this->head = head_;
-  this->n = n_;
+  this->ptr = ptr;
+  this->tail = tail;
+  this->head = head;
+  this->n = n;
 }
 
 Template bool UlistT::Iterator::operator==(const UlistT::Iterator &rhs)
@@ -271,16 +271,18 @@ Template typename UlistT::Iterator UlistT::begin()
 
 Template typename UlistT::Iterator UlistT::end()
 {
-  return Iterator(this->tail->next, this->tail, this->head, 0);
+  return Iterator(nullptr, this->tail, this->head, 0);
 }
 
 Template typename UlistT::Iterator UlistT::rbegin()
 {
+  assert(this->tail); /* TODO: don't know how to fix */
   return Iterator(this->tail, this->tail, this->head, (this->tail->totelem) - 1);
 }
 
 Template typename UlistT::Iterator UlistT::rend()
 {
+  assert(this->head);
   return Iterator(this->head->prev, this->tail, this->head, 0);
 }
 

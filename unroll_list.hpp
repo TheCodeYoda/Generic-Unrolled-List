@@ -36,7 +36,7 @@ template<typename T> class Ulist {
     using value_type = T;
     using pointer = T *;  // or also value_type*
     using reference = T &;
-    Iterator(Node<T> *ptr_, Node<T> *tail, Node<T> *head, int n_);
+    Iterator(Node<T> *ptr, Node<T> *tail, Node<T> *head, int n);
     Iterator &operator++();
     Iterator operator++(int);
     Iterator &operator--();
