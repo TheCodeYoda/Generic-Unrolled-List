@@ -2,6 +2,8 @@
 #define UNROLL_LIST_H
 
 #include <vector>
+#include <iterator>  // For std::forward_iterator_tag
+#include <cstddef>   // For std::ptrdiff_t
 
 using namespace std;
 
@@ -27,6 +29,11 @@ template<typename T> class Ulist {
     int n;
 
    public:
+    using iterator_category = std::bidirectional_iterator_tag;
+    using difference_type = std::ptrdiff_t;
+    using value_type = T;
+    using pointer = T *;  // or also value_type*
+    using reference = T &;
     Iterator(Node<T> *ptr_, int n_);
     Iterator &operator++();
     Iterator operator++(int);
