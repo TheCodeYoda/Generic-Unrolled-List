@@ -28,6 +28,7 @@ Template UlistT::Ulist(int max_elem)
 Template void UlistT::push_back(T data)
 {
   if (this->head == nullptr) {
+    assert(this->tail == nullptr);
     this->head = new Node<T>(this->max_elem);
     this->head->v[0] = data;
     (this->head->totelem)++;
@@ -52,6 +53,8 @@ Template void UlistT::push_back(T data)
 Template void UlistT::pop_back()
 {
   if (this->head) {
+    assert(this->tail);
+    /* TODO: this if case may never occur, verify this */
     if (this->tail->totelem == 0) {
       return;
     }
@@ -62,14 +65,24 @@ Template void UlistT::pop_back()
       if (this->tail) {
         this->tail->next = nullptr;
       }
+      else {
+        /* Only one node existed and now even that is removed */
+        /* since tail is pointing to null now, head should also now
+         * point to null */
+        this->head = nullptr;
+      }
       delete garbage;
     }
+  }
+  else {
+    assert(this->tail == nullptr);
   }
 }
 
 Template void UlistT::push_front(T data)
 {
   if (this->head == nullptr) {
+    assert(this->tail == nullptr);
     this->head = new NodeT(this->max_elem);
     this->head->v[0] = data;
     (this->head->totelem)++;
@@ -97,6 +110,7 @@ Template void UlistT::push_front(T data)
 Template void UlistT::pop_front()
 {
   if (this->head) {
+    /* TODO: this if case may never occur, verify this */
     if (this->tail->totelem == 0) {
       return;
     }
@@ -110,8 +124,14 @@ Template void UlistT::pop_front()
       if (this->head) {
         this->head->prev = nullptr;
       }
+      else {
+        this->tail = nullptr;
+      }
       delete garbage;
     }
+  }
+  else {
+    assert(this->tail == nullptr);
   }
 }
 
@@ -128,7 +148,7 @@ Template size_t UlistT::size()
 
 Template bool UlistT::empty()
 {
-  if ((*this).size()) {
+  if (this->size()) {
     return false;
   }
   return true;
@@ -137,13 +157,15 @@ Template bool UlistT::empty()
 Template void UlistT::display()
 {
   Node<T> *temp = this->head;
+  cout << "[";
   while (temp) {
     for (size_t i = 0; i < temp->totelem; i++) {
       cout << temp->v[i] << " ";
     }
-    cout << "\n";
+    cout << "|";
     temp = temp->next;
   }
+  cout << "]" << endl;
 }
 
 Template void UlistT::display_reverse()

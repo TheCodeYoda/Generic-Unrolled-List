@@ -178,16 +178,20 @@ int main()
       u.push_back(i);
       l.push_back(i);
     }
+
+    u.display();
     for (int i = 0; i < 3; i++) {
       u.pop_back();
       l.pop_back();
     }
     assert_eq_ulist(u, l, "pop_back()");
 
+    u.display();
     for (int i = 0; i < 7; i++) {
       u.pop_back();
       l.pop_back();
     }
+    u.display();
     assert_eq_ulist(u, l, "pop_back()");
     assert_str(u.size() == 0, "size pop_back()");
   }
