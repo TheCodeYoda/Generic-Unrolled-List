@@ -54,7 +54,7 @@ template<typename T> class Ulist {
   void pop_front();
   const T &front();
   const T &back();
-  int size();
+  size_t size();
   bool empty();
   void insert(const Iterator &it, T data);
   void erase(const Iterator &it);

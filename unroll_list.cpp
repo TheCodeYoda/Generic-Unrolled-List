@@ -1,5 +1,7 @@
 #include <iostream>
 #include <algorithm>
+#include <cassert>
+#include <list>
 
 #include "unroll_list.hpp"
 
@@ -113,10 +115,10 @@ Template void UlistT::pop_front()
   }
 }
 
-Template int UlistT::size()
+Template size_t UlistT::size()
 {
   NodeT *temp = this->head;
-  int count = 0;
+  size_t count = 0;
   while (temp) {
     count += temp->totelem;
     temp = temp->next;
@@ -288,45 +290,4 @@ template<typename ptr_t, typename T> ptr_t my_find(ptr_t first, ptr_t last, T t)
     ++first;
   }
   return first;
-}
-
-int main()
-{
-  Ulist<int> u(5);
-  for (int i = 1; i < 11; i++) {
-    u.push_back(i);
-  }
-  for (int i = 0; i < 5; i++) {
-    u.pop_back();
-  }
-  u.display();
-
-  u.push_front(6);
-  u.push_front(7);
-  u.push_front(8);
-  // u.display_reverse();
-  u.display();
-
-  cout << "\n\n";
-  disp(u.begin(), u.end());
-  cout << endl;
-
-  cout << *find(u.begin(), u.end(), 8) << "found\n";
-
-  cout << "\n\n";
-  cout << "\n";
-  std::reverse(u.begin(), u.end());
-  disp(u.begin(), u.end());
-  replace(u.begin(), u.end(), 8, -1);
-  cout << endl;
-  disp(u.begin(), u.end());
-
-  // int size = u.size();
-  // for (int i = 0; i < size; i++) {
-  //   u.pop_front();
-  //   u.display();
-  // }
-  // u.display();
-
-  // cout << u.size() << " " << u.empty() << endl;
 }
