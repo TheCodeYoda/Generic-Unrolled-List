@@ -172,7 +172,24 @@ int main()
 
   /* pop_back */
   {
-      /* TODO */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    for (int i = 0; i < 3; i++) {
+      u.pop_back();
+      l.pop_back();
+    }
+    assert_eq_ulist(u, l, "pop_back()");
+
+    for (int i = 0; i < 7; i++) {
+      u.pop_back();
+      l.pop_back();
+    }
+    assert_eq_ulist(u, l, "pop_back()");
+    assert_str(u.size() == 0, "size pop_back()");
   }
 
   /* push_front */
