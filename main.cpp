@@ -41,6 +41,117 @@ template<typename T> void assert_ne_ulist(Ulist<T> &ulist, list<T> &list, const 
 
 int main()
 {
+  /* constructor */
+  {
+      /* TODO */
+  }
+
+  /* destructor */
+  {
+      /* TODO */
+  }
+
+  /* operator= */
+  {
+      /* TODO */
+  }
+
+  /* assign */
+  {
+      /* TODO */
+  }
+
+  /* get_allocator */
+  {
+      /* TODO */
+  }
+
+  /* front */
+  {
+      /* TODO */
+  }
+
+  /* back */
+  {
+      /* TODO */
+  }
+
+  /* begin */
+  {
+      /* TODO */
+  }
+
+  /* cbegin */
+  {
+      /* TODO */
+  }
+
+  /* end */
+  {
+      /* TODO */
+  }
+
+  /* cend */
+  {
+      /* TODO */
+  }
+
+  /* rbegin */
+  {
+      /* TODO */
+  }
+
+  /* crbegin */
+  {
+      /* TODO */
+  }
+
+  /* rend */
+  {
+      /* TODO */
+  }
+
+  /* crend */
+  {
+      /* TODO */
+  }
+
+  /* empty */
+  {
+      /* TODO */
+  }
+
+  /* size */
+  {
+      /* TODO */
+  }
+
+  /* max_size */
+  {
+      /* TODO */
+  }
+
+  /* clear */
+  {
+      /* TODO */
+  }
+
+  /* insert */
+  {
+      /* TODO */
+  }
+
+  /* emplace */
+  {
+      /* TODO */
+  }
+
+  /* erase */
+  {
+      /* TODO */
+  }
+
+  /* push_back */
   {
     Ulist<int> u(5);
     list<int> l;
@@ -54,37 +165,103 @@ int main()
     assert_ne_ulist(u, l2, "push_back()");
   }
 
-  /* for (int i = 0; i < 5; i++) { */
-  /*   u.pop_back(); */
-  /* } */
-  /* u.display(); */
+  /* emplace_back */
+  {
+      /* TODO */
+  }
 
-  /* u.push_front(6); */
-  /* u.push_front(7); */
-  /* u.push_front(8); */
-  /* // u.display_reverse(); */
-  /* u.display(); */
+  /* pop_back */
+  {
+      /* TODO */
+  }
 
-  /* cout << "\n\n"; */
-  /* disp(u.begin(), u.end()); */
-  /* cout << endl; */
+  /* push_front */
+  {
+      /* TODO */
+  }
 
-  /* cout << *find(u.begin(), u.end(), 8) << "found\n"; */
+  /* emplace_front */
+  {
+      /* TODO */
+  }
 
-  /* cout << "\n\n"; */
-  /* cout << "\n"; */
-  /* std::reverse(u.begin(), u.end()); */
-  /* disp(u.begin(), u.end()); */
-  /* replace(u.begin(), u.end(), 8, -1); */
-  /* cout << endl; */
-  /* disp(u.begin(), u.end()); */
+  /* pop_front */
+  {
+      /* TODO */
+  }
 
-  /* // int size = u.size(); */
-  /* // for (int i = 0; i < size; i++) { */
-  /* //   u.pop_front(); */
-  /* //   u.display(); */
-  /* // } */
-  /* // u.display(); */
+  /* resize */
+  {
+      /* TODO */
+  }
 
-  /* // cout << u.size() << " " << u.empty() << endl; */
+  /* swap */
+  {
+      /* TODO */
+  }
+
+  /* merge */
+  {
+      /* TODO */
+  }
+
+  /* splice */
+  {
+      /* TODO */
+  }
+
+  /* remove */
+  {
+      /* TODO */
+  }
+
+  /* remove_if */
+  {
+      /* TODO */
+  }
+
+  /* reverse */
+  {
+      /* TODO */
+  }
+
+  /* unique */
+  {
+      /* TODO */
+  }
+
+  /* sort */
+  {
+      /* TODO */
+  }
+
+  /* operator== */
+  {
+      /* TODO */
+  }
+
+  /* operator!= */
+  {
+      /* TODO */
+  }
+
+  /* operator< */
+  {
+      /* TODO */
+  }
+
+  /* operator<= */
+  {
+      /* TODO */
+  }
+
+  /* operator> */
+  {
+      /* TODO */
+  }
+
+  /* operator>= */
+  {
+    /* TODO */
+  }
 }
