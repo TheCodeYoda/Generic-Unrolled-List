@@ -198,7 +198,16 @@ int main()
 
   /* push_front */
   {
-      /* TODO */
+    Ulist<int> u(5);
+    list<int> l;
+    list<int> l2;
+    for (int i = 1; i < 11; i++) {
+      u.push_front(i);
+      l.push_front(i);
+      l2.push_front(i + 1);
+    }
+    assert_eq_ulist(u, l, "push_back()");
+    assert_ne_ulist(u, l2, "push_back()");
   }
 
   /* emplace_front */
@@ -208,7 +217,28 @@ int main()
 
   /* pop_front */
   {
-      /* TODO */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_front(i);
+      l.push_front(i);
+    }
+
+    u.display();
+    for (int i = 0; i < 3; i++) {
+      u.pop_front();
+      l.pop_front();
+    }
+    assert_eq_ulist(u, l, "pop_front()");
+
+    u.display();
+    for (int i = 0; i < 7; i++) {
+      u.pop_front();
+      l.pop_front();
+    }
+    u.display();
+    assert_eq_ulist(u, l, "pop_front()");
+    assert_str(u.size() == 0, "size pop_front()");
   }
 
   /* resize */
