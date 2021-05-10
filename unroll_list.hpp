@@ -44,6 +44,7 @@ template<typename T> class Ulist {
     bool operator==(const Iterator &rhs);
     bool operator!=(const Iterator &rhs);
     T &operator*();
+    const T &operator*() const;
   };
 
   // List interface
@@ -68,7 +69,9 @@ template<typename T> class Ulist {
 
   // Iterator interface
   Iterator begin();
+  const Iterator cbegin() const;
   Iterator end();
+  const Iterator cend() const;
   Iterator rbegin();
   Iterator rend();
 };

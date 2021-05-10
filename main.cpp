@@ -107,15 +107,14 @@ int main()
 
   /* cbegin */
   {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "cbegin()"); */
-      /* assert_str(*u.cbegin() == *l.cbegin(), "cbegin()"); */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    assert_eq_ulist(u, l, "cbegin()");
+    assert_str(*u.cbegin() == *l.cbegin(), "cbegin()");
   }
 
   /* end */

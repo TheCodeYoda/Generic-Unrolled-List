@@ -312,12 +312,27 @@ Template T &UlistT::Iterator::operator*()
   return this->ptr->v[this->n];
 }
 
+Template const T &UlistT::Iterator::operator*() const
+{
+  return this->ptr->v[this->n];
+}
+
 Template typename UlistT::Iterator UlistT::begin()
 {
   return Iterator(this->head, this->tail, this->head, 0);
 }
 
+Template const typename UlistT::Iterator UlistT::cbegin() const
+{
+  return Iterator(this->head, this->tail, this->head, 0);
+}
+
 Template typename UlistT::Iterator UlistT::end()
+{
+  return Iterator(nullptr, this->tail, this->head, 0);
+}
+
+Template const typename UlistT::Iterator UlistT::cend() const
 {
   return Iterator(nullptr, this->tail, this->head, 0);
 }
