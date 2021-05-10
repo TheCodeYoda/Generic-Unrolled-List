@@ -239,7 +239,7 @@ Template UlistT::Iterator::Iterator(NodeT *ptr, NodeT *tail, NodeT *head, int n)
 
 Template bool UlistT::Iterator::operator==(const UlistT::Iterator &rhs)
 {
-  if ((this->ptr == rhs.ptr) && (this->n = rhs.n)) {
+  if ((this->ptr == rhs.ptr) && (this->n == rhs.n)) {
     return true;
   }
   return false;
