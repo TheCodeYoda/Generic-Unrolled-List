@@ -225,15 +225,14 @@ int main()
 
   /* clear */
   {
-      /* TODO */
-      /* ulist<int> u(5); */
-      /* assert_str(u.empty() == true, "clear()"); */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /* } */
-      /* assert_str(u.empty() == false, "clear()"); */
-      /* u.clear(); */
-      /* assert_str(u.empty() == true, "clear()"); */
+    Ulist<int> u(5);
+    assert_str(u.empty() == true, "clear()");
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+    }
+    assert_str(u.empty() == false, "clear()");
+    u.clear();
+    assert_str(u.empty() == true, "clear()");
   }
 
   /* insert */

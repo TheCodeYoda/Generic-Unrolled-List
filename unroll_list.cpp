@@ -154,6 +154,23 @@ Template bool UlistT::empty()
   return true;
 }
 
+Template void UlistT::clear()
+{
+  if (this->head == nullptr) {
+    assert(this->tail == nullptr);
+    return;
+  }
+
+  auto *node = this->head;
+  while (node != nullptr) {
+    auto *temp = node;
+    node = node->next;
+    delete temp;
+  }
+  this->head = nullptr;
+  this->tail = nullptr;
+}
+
 Template void UlistT::display()
 {
   Node<T> *temp = this->head;
