@@ -157,15 +157,14 @@ int main()
 
   /* crbegin */
   {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "crbegin()"); */
-      /* assert_str(*u.crbegin() == *l.crbegin(), "crbegin()"); */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    assert_eq_ulist(u, l, "crbegin()");
+    assert_str(*u.crbegin() == *l.crbegin(), "crbegin()");
   }
 
   /* rend */
