@@ -141,6 +141,30 @@ Template void UlistT::pop_front()
   }
 }
 
+Template T &UlistT::front()
+{
+  assert(this->head != nullptr);
+  return this->head->v[0];
+}
+
+Template const T &UlistT::front() const
+{
+  assert(this->head != nullptr);
+  return this->head->v[0];
+}
+
+Template T &UlistT::back()
+{
+  assert(this->tail != nullptr);
+  return this->tail->v[this->tail->totelem - 1];
+}
+
+Template const T &UlistT::back() const
+{
+  assert(this->tail != nullptr);
+  return this->tail->v[this->tail->totelem - 1];
+}
+
 Template size_t UlistT::size()
 {
   NodeT *temp = this->head;

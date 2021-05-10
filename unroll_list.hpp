@@ -53,8 +53,10 @@ template<typename T> class Ulist {
   void pop_back();
   void push_front(T data);
   void pop_front();
-  const T &front();
-  const T &back();
+  T &front();
+  const T &front() const;
+  T &back();
+  const T &back() const;
   size_t size();
   bool empty();
   void insert(const Iterator &it, T data);

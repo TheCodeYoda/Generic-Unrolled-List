@@ -71,28 +71,26 @@ int main()
 
   /* front */
   {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "front()"); */
-      /* assert_str(u.front() == l.front(), "front()"); */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    assert_eq_ulist(u, l, "front()");
+    assert_str(u.front() == l.front(), "front()");
   }
 
   /* back */
   {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "back()"); */
-      /* assert_str(u.back() == l.back(), "back()"); */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    assert_eq_ulist(u, l, "back()");
+    assert_str(u.back() == l.back(), "back()");
   }
 
   /* begin */
