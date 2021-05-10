@@ -58,8 +58,8 @@ template<typename T> class Ulist {
   const T &front() const;
   T &back();
   const T &back() const;
-  size_t size();
-  bool empty();
+  size_t size() const;
+  bool empty() const;
   void insert(const Iterator &it, T data);
   void erase(const Iterator &it);
   void erase(const Iterator &first, const Iterator &last);

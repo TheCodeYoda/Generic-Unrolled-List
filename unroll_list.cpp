@@ -165,7 +165,7 @@ Template const T &UlistT::back() const
   return this->tail->v[this->tail->totelem - 1];
 }
 
-Template size_t UlistT::size()
+Template size_t UlistT::size() const
 {
   NodeT *temp = this->head;
   size_t count = 0;
@@ -176,7 +176,7 @@ Template size_t UlistT::size()
   return count;
 }
 
-Template bool UlistT::empty()
+Template bool UlistT::empty() const
 {
   if (this->size()) {
     return false;
