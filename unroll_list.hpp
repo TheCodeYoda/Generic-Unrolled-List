@@ -48,6 +48,7 @@ template<typename T> class Ulist {
 
   // List interface
   Ulist(int max_elem);
+  ~Ulist();
   void push_back(T data);
   void pop_back();
   void push_front(T data);

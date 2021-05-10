@@ -25,6 +25,12 @@ Template UlistT::Ulist(int max_elem)
   this->tail = nullptr;
 }
 
+Template UlistT::~Ulist()
+{
+  this->clear();
+  assert(this->head == nullptr && this->tail == nullptr);
+}
+
 Template void UlistT::push_back(T data)
 {
   if (this->head == nullptr) {

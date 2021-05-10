@@ -50,9 +50,8 @@ int main()
 
   /* destructor */
   {
-      /* TODO */
-      /* auto *u = new Ulist<int>(5); */
-      /* delete u; */
+    auto *u = new Ulist<int>(5);
+    delete u;
   }
 
   /* operator= */
