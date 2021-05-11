@@ -244,6 +244,16 @@ int main()
     assert_eq_ulist(u, l, "insert()");
     u.clear();
     l.clear();
+
+    for (int i = 0; i < 4; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.insert(find(u.begin(), u.end(), 1), 9);
+    l.insert(find(l.begin(), l.end(), 1), 9);
+    assert_eq_ulist(u, l, "insert()");
+    u.clear();
+    l.clear();
   }
 
   /* emplace */

@@ -301,8 +301,16 @@ Template void UlistT::insert(const Iterator &it, const T &data)
     auto *next = it.ptr->next;
     auto *curr = it.ptr;
     auto *temp = new NodeT(this->max_elem);
+    /**
+     * suppose 1, 2, 3 | 4, _, _ |
+     * adding x before 2 to make
+     * 1, x, 2 | 3, _, _ | 4, _, _ |
+     **/
     temp->v[0] = curr->v[curr->totelem - 1];
-    curr->v[curr->totelem - 1] = data;
+    for (int i = curr->totelem - 1; i > it.n; i--) {
+      curr->v[i] = curr->v[i - 1];
+    }
+    curr->v[it.n] = data;
     temp->totelem = 1;
     temp->prev = it.ptr;
     temp->next = next;
