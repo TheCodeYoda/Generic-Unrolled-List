@@ -245,6 +245,15 @@ Template void UlistT::erase(const Iterator &first, const Iterator &last)
     auto *updated_head = this->head;
     it.head = updated_head;
     it++;
+    if (it.ptr == last.ptr) {
+      assert(it.n == 0);
+      for (int i = last.n; i > 0; i--) {
+        it.ptr->v[i - 1] = it.ptr->v[i];
+        (last.ptr->totelem)--;
+      }
+
+      break;
+    }
   }
 }
 
