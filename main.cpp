@@ -346,7 +346,7 @@ int main()
     l.clear();
 
     /* 0, 1, 2 | 3, _, _ | 6, 7, 8 */
-    /* 2 to 7 */
+    /* remove [2, 7] */
     for (int i = 0; i < 7; i++) {
       u.push_back(i);
       l.push_back(i);
@@ -361,6 +361,26 @@ int main()
     }
     u.erase(find(u.begin(), u.end(), 2), find(u.begin(), u.end(), 8));
     l.erase(find(l.begin(), l.end(), 2), find(l.begin(), l.end(), 8));
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, 1, 2 | 3, _, _ | 6, 7, 8 */
+    /* remove [0, 3] */
+    for (int i = 0; i < 7; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 7; i < 9; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(find(u.begin(), u.end(), 0), find(u.begin(), u.end(), 6));
+    l.erase(find(l.begin(), l.end(), 0), find(l.begin(), l.end(), 6));
     assert_eq_ulist(u, l, "erase()");
     u.clear();
     l.clear();
