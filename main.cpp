@@ -233,7 +233,17 @@ int main()
 
   /* insert */
   {
-      /* TODO */
+    Ulist<int> u(3);
+    list<int> l;
+    for (int i = 0; i < 1; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.insert(u.begin(), 1);
+    l.insert(l.begin(), 1);
+    assert_eq_ulist(u, l, "insert()");
+    u.clear();
+    l.clear();
   }
 
   /* emplace */

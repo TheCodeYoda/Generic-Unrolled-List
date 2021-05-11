@@ -257,6 +257,65 @@ Template void UlistT::erase(const Iterator &first, const Iterator &last)
   }
 }
 
+Template void UlistT::insert(const Iterator &it, const T &data)
+{
+  int max_elem = this->max_elem;
+  if (it.n == 0) {
+    /* There is space in previous node to insert data */
+    if (it.ptr->prev) {
+      int prev_totelem = it.ptr->prev->totelem;
+      if (prev_totelem - 1 < max_elem - 1) {
+        it.ptr->prev->v[it.ptr->prev->totelem] = data;
+        ++(it.ptr->prev->totelem);
+        return;
+      }
+    }
+    /* Needs new node between previous and current */
+    auto *temp = new NodeT(this->max_elem);
+    temp->v[0] = data;
+    temp->totelem = 1;
+    auto *curr = it.ptr;
+    auto *prev = curr->prev;
+    temp->next = curr;
+    temp->prev = prev;
+    curr->prev = temp;
+    if (prev) {
+      prev->next = temp;
+    }
+    else {
+      this->head = temp;
+    }
+  }
+  /* There is space in the current node */
+  else if (it.ptr->totelem - 1 < max_elem - 1) {
+    auto it_n = it.ptr->v.begin();
+    advance(it_n, it.n);
+    it.ptr->v.insert(it_n, data);
+    ++(it.ptr->totelem);
+  }
+  /* No space in current node, and n != 0 */
+  /* 1, 2, 3 | _, _, _ */
+  /* 1, 2, x | 3, _, _ */
+  else if (it.ptr->totelem - 1 == max_elem - 1) {
+    /* inserting temp between curr and next */
+    auto *next = it.ptr->next;
+    auto *curr = it.ptr;
+    auto *temp = new NodeT(this->max_elem);
+    temp->v[0] = curr->v[curr->totelem - 1];
+    curr->v[curr->totelem - 1] = data;
+    temp->totelem = 1;
+    temp->prev = it.ptr;
+    temp->next = next;
+    curr->next = temp;
+    if (next) {
+      next->prev = temp;
+    }
+    else {
+      this->tail = temp;
+    }
+  }
+}
+
 Template void UlistT::clear()
 {
   if (this->head == nullptr) {
@@ -460,48 +519,4 @@ template<typename ptr_t, typename T> ptr_t my_find(ptr_t first, ptr_t last, T t)
     ++first;
   }
   return first;
-}
-
-template<typename T>
-void insert(const Iterator &it, const T &data)
-{
-  int max_elem = this->max_elem;
-  if(it.n == 0)
-  {
-      if(it.ptr->prev)
-      {
-        int prev_totelem = it.ptr->prev->totelem;
-        if(prev_totelem - 1 < max_elem - 1)
-        {
-          it.ptr->prev->v[it.ptr->prev->totelem] = data;
-          ++(it.ptr->prev->totelem);
-          // ?
-          return;
-        }
-      }
-      Node<T>* temp = new Node<T>;
-      temp->v[0] = data;
-      temp->totelem = 1;
-      temp->next = it.ptr;
-      temp->prev = it.ptr->prev;
-      it.ptr->prev = temp;
-      if(temp->prev) temp->prev->next = temp;
-      // ?
-  }
-  else if(it.ptr->totelem - 1 < max_elem - 1)
-  {
-    it.ptr->v.insert(it.n, data);
-    ++(it.ptr->totelem);
-  }
-  else if(it.ptr->totelem - 1 == max_elem - 1)
-  {
-    Node<T>* temp = new Node<T>;
-    temp->v[0] = it.ptr->v[it.ptr->totelem - 1];
-    temp->totelem = 1;
-    temp->prev = it.ptr;
-    temp->next = it.ptr->next;
-    if(it.ptr->next) it.ptr->next->prev = temp;
-    it.ptr->next = temp;
-    // ?
-  }
 }
