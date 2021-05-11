@@ -476,29 +476,6 @@ Template const typename UlistT::Iterator UlistT::cend() const
 {
   return Iterator(nullptr, this->tail, this->head, 0);
 }
-
-Template typename UlistT::Iterator UlistT::rbegin()
-{
-  assert(this->tail); /* TODO: don't know how to fix */
-  return Iterator(this->tail, this->tail, this->head, (this->tail->totelem) - 1);
-}
-
-Template const typename UlistT::Iterator UlistT::crbegin() const
-{
-  assert(this->tail); /* TODO: don't know how to fix */
-  return Iterator(this->tail, this->tail, this->head, (this->tail->totelem) - 1);
-}
-
-Template typename UlistT::Iterator UlistT::rend()
-{
-  return Iterator(nullptr, this->tail, this->head, 0);
-}
-
-Template const typename UlistT::Iterator UlistT::crend() const
-{
-  return Iterator(nullptr, this->tail, this->head, 0);
-}
-
 template<typename ptr_t> void disp(ptr_t first, ptr_t last)
 {
   while (first != last) {

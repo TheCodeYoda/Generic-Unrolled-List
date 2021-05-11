@@ -74,10 +74,6 @@ template<typename T> class Ulist {
   const Iterator cbegin() const;
   Iterator end();
   const Iterator cend() const;
-  Iterator rbegin();
-  const Iterator crbegin() const;
-  Iterator rend();
-  const Iterator crend() const;
 };
 
 #endif

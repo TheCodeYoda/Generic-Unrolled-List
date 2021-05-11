@@ -136,60 +136,6 @@ int main()
     }
   }
 
-  /* rbegin */
-  {
-    Ulist<int> u(5);
-    list<int> l;
-    for (int i = 1; i < 11; i++) {
-      u.push_back(i);
-      l.push_back(i);
-    }
-    assert_eq_ulist(u, l, "rbegin()");
-    assert_str(*u.rbegin() == *l.rbegin(), "rbegin()");
-  }
-
-  /* crbegin */
-  {
-    Ulist<int> u(5);
-    list<int> l;
-    for (int i = 1; i < 11; i++) {
-      u.push_back(i);
-      l.push_back(i);
-    }
-    assert_eq_ulist(u, l, "crbegin()");
-    assert_str(*u.crbegin() == *l.crbegin(), "crbegin()");
-  }
-
-  /* rend */
-  {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "rend()"); */
-      /* assert_str(*(++u.rend()) == *(++l.rend()), "rend()"); */
-  }
-
-  /* crend */
-  {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "crend()"); */
-      /* auto uit = u.rbegin(); */
-      /* auto lit = l.rbegin(); */
-      /* for (; uit != u.crend() && lit != l.crend(); uit--, lit--) { */
-      /*   assert_str(*uit == *lit, "crend()"); */
-      /* } */
-  }
-
   /* empty */
   {
     Ulist<int> u(5);
