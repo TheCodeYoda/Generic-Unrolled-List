@@ -388,3 +388,47 @@ template<typename ptr_t, typename T> ptr_t my_find(ptr_t first, ptr_t last, T t)
   }
   return first;
 }
+
+template<typename T>
+void insert(const Iterator &it, const T &data)
+{
+  int max_elem = this->max_elem;
+  if(it.n == 0)
+  {
+      if(it.ptr->prev)
+      {
+        int prev_totelem = it.ptr->prev->totelem;
+        if(prev_totelem - 1 < max_elem - 1)
+        {
+          it.ptr->prev->v[it.ptr->prev->totelem] = data;
+          ++(it.ptr->prev->totelem);
+          // ?
+          return;
+        }
+      }
+      Node<T>* temp = new Node<T>;
+      temp->v[0] = data;
+      temp->totelem = 1;
+      temp->next = it.ptr;
+      temp->prev = it.ptr->prev;
+      it.ptr->prev = temp;
+      if(temp->prev) temp->prev->next = temp;
+      // ?
+  }
+  else if(it.ptr->totelem - 1 < max_elem - 1)
+  {
+    it.ptr->v.insert(it.n, data);
+    ++(it.ptr->totelem);
+  }
+  else if(it.ptr->totelem - 1 == max_elem - 1)
+  {
+    Node<T>* temp = new Node<T>;
+    temp->v[0] = it.ptr->v[it.ptr->totelem - 1];
+    temp->totelem = 1;
+    temp->prev = it.ptr;
+    temp->next = it.ptr->next;
+    if(it.ptr->next) it.ptr->next->prev = temp;
+    it.ptr->next = temp;
+    // ?
+  }
+}
