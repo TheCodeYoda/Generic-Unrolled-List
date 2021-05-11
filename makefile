@@ -10,7 +10,7 @@ endif
 
 GL_FLAGS =
 LIB_FLAGS =
-OBJS = unroll_list.o unroll_list_impl.o
+OBJS =
 PROJECT_NAME = gp_project
 
 ifeq (${mode}, debug)
@@ -27,10 +27,6 @@ ${PROJECT}: ${OBJS} main.o clean_emacs_files
 
 main.o:
 	${CC} ${INCLUDES} ${FLAGS} -c main.cpp -o $@ ${GL_FLAGS} ${LIB_FLAGS}
-unroll_list.o:
-	${CC} ${INCLUDES} ${FLAGS} -c unroll_list.cpp -o $@ ${GL_FLAGS} ${LIB_FLAGS}
-unroll_list_impl.o:
-	${CC} ${INCLUDES} ${FLAGS} -c unroll_list_impl.cpp -o $@ ${GL_FLAGS} ${LIB_FLAGS}
 
 .PHONEY: clean clean_emacs_files clean_all
 clean:
