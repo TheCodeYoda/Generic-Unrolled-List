@@ -440,4 +440,38 @@ int main()
     assert_eq_ulist(u, l, "pop_front()");
     assert_str(u.size() == 0, "size pop_front()");
   }
+
+  /* operations */
+  {
+    Ulist<float> uf(5);
+    uf.push_front(1.1);
+    uf.push_front(2.1);
+    uf.push_front(3.1);
+    uf.push_front(4.1);
+    uf.push_front(5.1);
+    uf.push_front(6.1);
+    uf.display();
+    cout << endl;
+
+    Ulist<string> us(3);
+    us.push_back("hello");
+    us.push_back("world");
+    us.push_back("bill");
+    us.push_back("is");
+    us.push_back("married");
+    us.display();
+    us.erase((--us.end()));
+    us.insert(us.end(), "single");
+    us.display();
+    cout << endl;
+
+    replace(us.begin(), us.end(), string("single"), string("married"));
+    replace(us.begin(), us.end(), string("is"), string("was"));
+    us.display();
+    cout << endl;
+
+    reverse(us.begin(), us.end());
+    us.display();
+    cout << endl;
+  }
 }
