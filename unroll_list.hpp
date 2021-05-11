@@ -14,6 +14,7 @@ template<typename T> class Node {
   Node *next;
   Node *prev;
   Node(int size);
+  Node<T> &operator=(const Node<T> &other);
 };
 
 template<typename T> class Ulist {
@@ -51,6 +52,7 @@ template<typename T> class Ulist {
 
   // List interface
   Ulist(int max_elem);
+  Ulist<T> &operator=(const Ulist<T> &other);
   ~Ulist();
   void push_back(T data);
   void pop_back();

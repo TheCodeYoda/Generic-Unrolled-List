@@ -40,6 +40,22 @@ template<typename T> void assert_ne_ulist(Ulist<T> &ulist, list<T> &list, const 
   }
 }
 
+template<typename T> void assert_ne_ulist(Ulist<T> &ulist, Ulist<T> &list, const string &str = "")
+{
+  if (ulist.size() == list.size()) {
+    auto uit = ulist.begin();
+    auto it = list.begin();
+    bool equal = true;
+    for (; uit != ulist.end(); uit++, it++) {
+      if (*uit != *it) {
+        equal = false;
+        break;
+      }
+    }
+    assert_str(equal == false, str);
+  }
+}
+
 int main()
 {
   /* constructor */
@@ -57,7 +73,18 @@ int main()
 
   /* operator= */
   {
-      /* TODO */
+    Ulist<int> u(5);
+    for (int i = 0; i < 10; i++) {
+      u.push_back(i);
+    }
+    Ulist<int> u2(3);
+    for (int i = 0; i < 8; i++) {
+      u2.push_back(i * 10);
+    }
+    u = u2;
+
+    *u.begin() = 125;
+    assert_ne_ulist(u, u2, "operator=");
   }
 
   /* front */
