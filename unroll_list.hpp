@@ -45,6 +45,8 @@ template<typename T> class Ulist {
     bool operator!=(const Iterator &rhs);
     T &operator*();
     const T &operator*() const;
+
+    template<typename> friend class Ulist;
   };
 
   // List interface
