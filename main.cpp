@@ -60,16 +60,6 @@ int main()
       /* TODO */
   }
 
-  /* assign */
-  {
-      /* TODO */
-  }
-
-  /* get_allocator */
-  {
-      /* TODO */
-  }
-
   /* front */
   {
     Ulist<int> u(5);
@@ -120,28 +110,30 @@ int main()
 
   /* end */
   {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "end()"); */
-      /* assert_str(*u.end() == *l.end(), "end()"); */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    assert_eq_ulist(u, l, "end()");
+    assert_str(*(--u.end()) == *(--l.end()), "end()");
   }
 
   /* cend */
   {
-      /* TODO */
-      /* Ulist<int> u(5); */
-      /* list<int> l; */
-      /* for (int i = 1; i < 11; i++) { */
-      /*   u.push_back(i); */
-      /*   l.push_back(i); */
-      /* } */
-      /* assert_eq_ulist(u, l, "cend()"); */
-      /* assert_str(*u.cend() == *l.cend(), "cend()"); */
+    Ulist<int> u(5);
+    list<int> l;
+    for (int i = 1; i < 11; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    assert_eq_ulist(u, l, "cend()");
+    auto uit = u.begin();
+    auto lit = l.begin();
+    for (; uit != u.cend() && lit != l.cend(); uit++, lit++) {
+      assert_str(*uit == *lit, "cend()");
+    }
   }
 
   /* rbegin */
@@ -178,7 +170,7 @@ int main()
       /*   l.push_back(i); */
       /* } */
       /* assert_eq_ulist(u, l, "rend()"); */
-      /* assert_str(*u.rend() == *l.rend(), "rend()"); */
+      /* assert_str(*(++u.rend()) == *(++l.rend()), "rend()"); */
   }
 
   /* crend */
@@ -191,7 +183,11 @@ int main()
       /*   l.push_back(i); */
       /* } */
       /* assert_eq_ulist(u, l, "crend()"); */
-      /* assert_str(*u.crend() == *l.crend(), "crend()"); */
+      /* auto uit = u.rbegin(); */
+      /* auto lit = l.rbegin(); */
+      /* for (; uit != u.crend() && lit != l.crend(); uit--, lit--) { */
+      /*   assert_str(*uit == *lit, "crend()"); */
+      /* } */
   }
 
   /* empty */
@@ -212,11 +208,6 @@ int main()
       u.push_back(i);
     }
     assert_str(u.size() == 10, "size()");
-  }
-
-  /* max_size */
-  {
-      /* TODO */
   }
 
   /* clear */
@@ -254,11 +245,6 @@ int main()
     assert_eq_ulist(u, l, "insert()");
     u.clear();
     l.clear();
-  }
-
-  /* emplace */
-  {
-      /* TODO */
   }
 
   /* erase */
@@ -420,11 +406,6 @@ int main()
     assert_ne_ulist(u, l2, "push_back()");
   }
 
-  /* emplace_back */
-  {
-      /* TODO */
-  }
-
   /* pop_back */
   {
     Ulist<int> u(5);
@@ -463,11 +444,6 @@ int main()
     assert_ne_ulist(u, l2, "push_back()");
   }
 
-  /* emplace_front */
-  {
-      /* TODO */
-  }
-
   /* pop_front */
   {
     Ulist<int> u(5);
@@ -490,80 +466,5 @@ int main()
 
     assert_eq_ulist(u, l, "pop_front()");
     assert_str(u.size() == 0, "size pop_front()");
-  }
-
-  /* resize */
-  {
-      /* TODO */
-  }
-
-  /* swap */
-  {
-      /* TODO */
-  }
-
-  /* merge */
-  {
-      /* TODO */
-  }
-
-  /* splice */
-  {
-      /* TODO */
-  }
-
-  /* remove */
-  {
-      /* TODO */
-  }
-
-  /* remove_if */
-  {
-      /* TODO */
-  }
-
-  /* reverse */
-  {
-      /* TODO */
-  }
-
-  /* unique */
-  {
-      /* TODO */
-  }
-
-  /* sort */
-  {
-      /* TODO */
-  }
-
-  /* operator== */
-  {
-      /* TODO */
-  }
-
-  /* operator!= */
-  {
-      /* TODO */
-  }
-
-  /* operator< */
-  {
-      /* TODO */
-  }
-
-  /* operator<= */
-  {
-      /* TODO */
-  }
-
-  /* operator> */
-  {
-      /* TODO */
-  }
-
-  /* operator>= */
-  {
-    /* TODO */
   }
 }
