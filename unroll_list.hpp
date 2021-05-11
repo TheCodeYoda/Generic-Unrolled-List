@@ -60,7 +60,7 @@ template<typename T> class Ulist {
   const T &back() const;
   size_t size() const;
   bool empty() const;
-  void insert(const Iterator &it, T data);
+  void insert(const Iterator &it, const T &data);
   void erase(const Iterator &it);
   void erase(const Iterator &first, const Iterator &last);
   void clear();
