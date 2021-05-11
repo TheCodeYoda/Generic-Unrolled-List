@@ -18,11 +18,68 @@ Template NodeT::Node(int size)
   this->prev = nullptr;
 }
 
+Template NodeT &NodeT::operator=(const NodeT &other)
+{
+  this->totelem = other.totelem;
+  this->v = other.v;
+  return *this;
+}
+
 Template UlistT::Ulist(int max_elem)
 {
   this->max_elem = max_elem;
   this->head = nullptr;
   this->tail = nullptr;
+}
+
+Template UlistT &UlistT::operator=(const UlistT &other)
+{
+  this->clear();
+
+  /* no nodes exist */
+  if (other.head == nullptr) {
+    assert(other.tail == nullptr);
+    return *this;
+  }
+  /* single node exists */
+  if (other.head == other.tail) {
+    this->head = new NodeT(other.max_elem);
+    this->tail = this->head;
+    this->max_elem = other.max_elem;
+    *this->head = *other.head;
+    this->head->next = nullptr;
+    this->head->prev = nullptr;
+    return *this;
+  }
+  /* multiple nodes exist */
+  this->max_elem = other.max_elem;
+  auto *curr = new NodeT(other.max_elem);
+  NodeT *prev = nullptr;
+  auto *other_curr = other.head;
+  this->head = curr;
+  while (true) {
+    *curr = *other_curr; /* set contents*/
+    curr->prev = prev;   /* make prev link */
+    if (prev) {
+      prev->next = curr; /* make next link */
+    }
+
+    if (other_curr == other.tail) {
+      if (prev) {
+        prev->next = curr; /* make next link */
+      }
+      break;
+    }
+
+    prev = curr;
+
+    other_curr = other_curr->next;
+    curr = new NodeT(other.max_elem);
+  }
+  this->tail = curr;
+  assert(this->tail->next == nullptr);
+
+  return *this;
 }
 
 Template UlistT::~Ulist()
