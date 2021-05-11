@@ -311,20 +311,36 @@ int main()
       u.push_back(i);
       l.push_back(i);
     }
-    u.display();
     u.erase(--(--u.end()));
     l.erase(--(--l.end()));
     u.erase(--(--u.end()));
     l.erase(--(--l.end()));
-    u.display();
     for (int i = 7; i < 9; i++) {
       u.push_back(i);
       l.push_back(i);
     }
-    u.display();
     u.erase(find(u.begin(), u.end(), 3));
     l.erase(find(l.begin(), l.end(), 3));
-    u.display();
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, 1, 2 | 3, _, _ | 6, 7, 8 */
+    /* remove all */
+    for (int i = 0; i < 7; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 7; i < 9; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(u.begin(), u.end());
+    l.erase(l.begin(), l.end());
     assert_eq_ulist(u, l, "erase()");
     u.clear();
     l.clear();

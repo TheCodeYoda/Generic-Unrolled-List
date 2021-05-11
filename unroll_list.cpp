@@ -228,6 +228,26 @@ Template void UlistT::erase(const Iterator &it)
   (it.ptr->totelem)--;
 }
 
+Template void UlistT::erase(const Iterator &first, const Iterator &last)
+{
+  assert(first.ptr);
+  assert(first.head == last.head);
+  assert(first.tail == last.tail);
+  assert(first.head == this->head);
+  assert(first.tail == this->tail);
+
+  auto one_before_first = first;
+  one_before_first--;
+  auto it = first;
+  while (it != last) {
+    this->erase(it);
+    it = one_before_first;
+    auto *updated_head = this->head;
+    it.head = updated_head;
+    it++;
+  }
+}
+
 Template void UlistT::clear()
 {
   if (this->head == nullptr) {
