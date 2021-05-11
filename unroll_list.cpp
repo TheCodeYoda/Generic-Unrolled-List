@@ -184,6 +184,79 @@ Template bool UlistT::empty() const
   return true;
 }
 
+Template void UlistT::erase(const Iterator &it)
+{
+  assert(it.ptr);
+  assert(it.head == this->head);
+  assert(it.tail == this->tail);
+  assert(it.n >= 0 && it.n < it.ptr->totelem);
+
+  /* single node, single element */
+  if (it.head == it.tail) {
+    if (it.n == 0 && it.ptr->totelem == 1) {
+      delete this->head;
+      this->head = nullptr;
+      this->tail = nullptr;
+      return;
+    }
+  }
+  /* single element in node */
+  if (it.ptr->totelem == 1) {
+    auto *prev = it.ptr->prev;
+    auto *next = it.ptr->next;
+    auto *curr = it.ptr;
+    if (prev) {
+      prev->next = next;
+    }
+    if (next) {
+      next->prev = prev;
+    }
+    if (curr == it.head) {
+      this->head = this->head->next;
+    }
+    if (curr == it.tail) {
+      this->tail = this->tail->prev;
+    }
+    delete curr;
+    return;
+  }
+  /* multiple elements in node */
+  assert(it.ptr->totelem > 1);
+  for (int i = it.n; i < (it.ptr->totelem) - 1; i++) {
+    it.ptr->v[i] = it.ptr->v[i + 1];
+  }
+  (it.ptr->totelem)--;
+}
+
+Template void UlistT::erase(const Iterator &first, const Iterator &last)
+{
+  assert(first.ptr);
+  assert(first.head == last.head);
+  assert(first.tail == last.tail);
+  assert(first.head == this->head);
+  assert(first.tail == this->tail);
+
+  auto one_before_first = first;
+  one_before_first--;
+  auto it = first;
+  while (it != last) {
+    this->erase(it);
+    it = one_before_first;
+    auto *updated_head = this->head;
+    it.head = updated_head;
+    it++;
+    if (it.ptr == last.ptr) {
+      assert(it.n == 0);
+      for (int i = last.n; i > 0; i--) {
+        it.ptr->v[i - 1] = it.ptr->v[i];
+        (last.ptr->totelem)--;
+      }
+
+      break;
+    }
+  }
+}
+
 Template void UlistT::clear()
 {
   if (this->head == nullptr) {

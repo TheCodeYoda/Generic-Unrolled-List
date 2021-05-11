@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include <cassert>
+#include <algorithm>
 
 #include "unroll_list.hpp"
 
@@ -242,7 +243,147 @@ int main()
 
   /* erase */
   {
-      /* TODO */
+    /* single node, single element */
+    Ulist<int> u(3);
+    list<int> l;
+    u.push_back(1);
+    l.push_back(1);
+    u.erase(u.begin());
+    l.erase(l.begin());
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* single node, 2 elements */
+    for (int i = 0; i < 2; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--u.end());
+    l.erase(--l.end());
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, 1, _ |  3, 4, _ */
+    /* remove 3, 4 */
+    for (int i = 0; i < 4; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 4; i < 6; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--u.end());
+    l.erase(--l.end());
+    u.erase(--u.end());
+    l.erase(--l.end());
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, _, _ | 3, 4, _  */
+    /* remove 0 */
+    for (int i = 0; i < 4; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 4; i < 5; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(u.begin());
+    l.erase(l.begin());
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, 1, 2 | 3, _, _ | 6, 7, 8 */
+    /* remove 3 */
+    for (int i = 0; i < 7; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 7; i < 9; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(find(u.begin(), u.end(), 3));
+    l.erase(find(l.begin(), l.end(), 3));
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, 1, 2 | 3, _, _ | 6, 7, 8 */
+    /* remove all */
+    for (int i = 0; i < 7; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 7; i < 9; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(u.begin(), u.end());
+    l.erase(l.begin(), l.end());
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, 1, 2 | 3, _, _ | 6, 7, 8 */
+    /* remove [2, 7] */
+    for (int i = 0; i < 7; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 7; i < 9; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(find(u.begin(), u.end(), 2), find(u.begin(), u.end(), 8));
+    l.erase(find(l.begin(), l.end(), 2), find(l.begin(), l.end(), 8));
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
+
+    /* 0, 1, 2 | 3, _, _ | 6, 7, 8 */
+    /* remove [0, 3] */
+    for (int i = 0; i < 7; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    u.erase(--(--u.end()));
+    l.erase(--(--l.end()));
+    for (int i = 7; i < 9; i++) {
+      u.push_back(i);
+      l.push_back(i);
+    }
+    u.erase(find(u.begin(), u.end(), 0), find(u.begin(), u.end(), 6));
+    l.erase(find(l.begin(), l.end(), 0), find(l.begin(), l.end(), 6));
+    assert_eq_ulist(u, l, "erase()");
+    u.clear();
+    l.clear();
   }
 
   /* push_back */
