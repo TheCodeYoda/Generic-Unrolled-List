@@ -359,6 +359,10 @@ template<typename T> class Ulist {
 
   void insert(const Iterator &it, const T &data)
   {
+    if (it.ptr == nullptr) {
+      this->push_back(data);
+      return;
+    }
     int max_elem = this->max_elem;
     if (it.n == 0) {
       /* There is space in previous node to insert data */
@@ -370,6 +374,7 @@ template<typename T> class Ulist {
           return;
         }
       }
+
       /* Needs new node between previous and current */
       auto *temp = new Node<T>(this->max_elem);
       temp->v[0] = data;
