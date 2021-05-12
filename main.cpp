@@ -12,6 +12,7 @@ struct Date {
 
   friend ostream &operator<<(ostream &o, const Date &d);
   friend bool operator==(const Date &x, const Date &y);
+  friend bool operator!=(const Date &x, const Date &y);
 };
 
 ostream &operator<<(ostream &o, const Date &d)
@@ -23,6 +24,11 @@ ostream &operator<<(ostream &o, const Date &d)
 bool operator==(const Date &x, const Date &y)
 {
   return x.dd == y.dd && x.mm == y.mm && x.yy == y.yy;
+}
+
+bool operator!=(const Date &x, const Date &y)
+{
+  return !(x == y);
 }
 
 void assert_str(bool val, const string &str)
@@ -463,6 +469,7 @@ int main()
 
   /* operations */
   {
+    cout << "Integer data type:\n";
     Ulist<int> ui(3);
     ui.push_back(1);
     ui.push_back(2);
@@ -471,6 +478,7 @@ int main()
     cout << *find(ui.begin(), ui.end(), 2) << " element found...\n";
     cout << "\n\n";
 
+    cout << "Float data type:\n";
     Ulist<float> uf(5);
     uf.push_front(1.1);
     uf.push_front(2.1);
@@ -484,6 +492,7 @@ int main()
     cout << endl;
     cout << endl;
 
+    cout << "String data type:\n";
     Ulist<string> us(3);
     us.push_back("hello");
     us.push_back("world");
@@ -520,6 +529,7 @@ int main()
 
     u.display();
 
+    cout << "reversing : " << endl;
     reverse(u.begin(), u.end());
     u.display();
     auto it = find_if(u.begin(), u.end(), [](const Date &d) { return d.yy == 3; });
@@ -530,6 +540,11 @@ int main()
     Date x = {1, 2, 4};
     u.erase(find_if(u.begin(), u.end(), [&](const Date &d) { return d == x; }));
 
+    x = {2, 7, 20};
+
+    u.erase(find_if(u.begin(), u.end(), [&](const Date &d) { return d == x; }));
+
     u.display();
+    cout << endl << endl << endl;
   }
 }
