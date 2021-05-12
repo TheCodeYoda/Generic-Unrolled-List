@@ -1,5 +1,6 @@
 CC = g++
 INCLUDES =
+DEFINE_FLAGS=
 
 ifeq (${mode}, release)
 	FLAGS = -O3 -march=native -std=c++17
@@ -22,11 +23,11 @@ endif
 ${PROJECT}: ${OBJS} main.o clean_emacs_files
 	@echo "Building on "${mode}" mode"
 	@echo ".........................."
-	${CC} ${INCLUDES} ${FLAGS} ${OBJS} main.o -o $@ ${GL_FLAGS} ${LIB_FLAGS}
+	${CC} ${INCLUDES} ${FLAGS} ${DEFINE_FLAGS} ${OBJS} main.o -o $@ ${GL_FLAGS} ${LIB_FLAGS}
 	-make clean
 
 main.o:
-	${CC} ${INCLUDES} ${FLAGS} -c main.cpp -o $@ ${GL_FLAGS} ${LIB_FLAGS}
+	${CC} ${INCLUDES} ${FLAGS} ${DEFINE_FLAGS} -c main.cpp -o $@ ${GL_FLAGS} ${LIB_FLAGS}
 
 .PHONEY: clean clean_emacs_files clean_all
 clean:

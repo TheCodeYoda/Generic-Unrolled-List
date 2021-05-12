@@ -522,7 +522,6 @@ int main()
     u.display();
     auto it = find_if(u.begin(), u.end(), [](const Date &d) { return d.yy == 3; });
     u.insert(it, {1, 2, 4});
-    cout << "inserted {1,2,4}....\n";
 
     u.display();
 

@@ -359,6 +359,16 @@ template<typename T> class Ulist {
 
   void insert(const Iterator &it, const T &data)
   {
+    assert(it.head == this->head);
+    assert(it.tail == this->tail);
+#ifdef ULIST_DEBUG
+    if (it.ptr) {
+      cout << "inserting:" << data << " before: " << *it << endl;
+    }
+    else {
+      cout << "inserting:" << data << endl;
+    }
+#endif
     if (it.ptr == nullptr) {
       this->push_back(data);
       return;
@@ -435,6 +445,10 @@ template<typename T> class Ulist {
     assert(it.head == this->head);
     assert(it.tail == this->tail);
     assert(it.n >= 0 && it.n < it.ptr->totelem);
+
+#ifdef ULIST_DEBUG
+    cout << "erasing: " << *it << endl;
+#endif
 
     /* single node, single element */
     if (it.head == it.tail) {
