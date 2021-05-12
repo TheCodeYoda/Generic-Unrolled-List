@@ -503,11 +503,13 @@ int main()
 
     reverse(us.begin(), us.end());
     us.display();
-    cout << endl << " " << *find(us.begin(), us.end(), string("was")) << "element found...\n";
+    cout << endl;
+    cout << *find(us.begin(), us.end(), string("was")) << " element found...\n";
     cout << endl;
   }
 
   {
+    cout << endl << endl << "Custom Data Type: Date" << endl;
     Ulist<Date> u(3);
     u.push_back({30, 1, 20});
     u.push_back({21, 11, 19});
