@@ -5,6 +5,26 @@
 
 #include "unroll_list.hpp"
 
+struct Date {
+  int dd;
+  int mm;
+  int yy;
+
+  friend ostream &operator<<(ostream &o, const Date &d);
+  friend bool operator==(const Date &x, const Date &y);
+};
+
+ostream &operator<<(ostream &o, const Date &d)
+{
+  o << d.dd << "." << d.mm << "." << d.yy;
+  return o;
+}
+
+bool operator==(const Date &x, const Date &y)
+{
+  return x.dd == y.dd && x.mm == y.mm && x.yy == y.yy;
+}
+
 void assert_str(bool val, const string &str)
 {
   if (val) {
@@ -443,6 +463,14 @@ int main()
 
   /* operations */
   {
+    Ulist<int> ui(3);
+    ui.push_back(1);
+    ui.push_back(2);
+    ui.push_back(3);
+    ui.display();
+    cout << *find(ui.begin(), ui.end(), 2) << " element found...\n";
+    cout << "\n\n";
+
     Ulist<float> uf(5);
     uf.push_front(1.1);
     uf.push_front(2.1);
@@ -451,6 +479,9 @@ int main()
     uf.push_front(5.1);
     uf.push_front(6.1);
     uf.display();
+    cout << "min_element: " << *std::min_element(uf.begin(), uf.end()) << endl;
+    cout << "max_element: " << *std::max_element(uf.begin(), uf.end()) << endl;
+    cout << endl;
     cout << endl;
 
     Ulist<string> us(3);
@@ -472,6 +503,32 @@ int main()
 
     reverse(us.begin(), us.end());
     us.display();
+    cout << endl << " " << *find(us.begin(), us.end(), string("was")) << "element found...\n";
     cout << endl;
+  }
+
+  {
+    Ulist<Date> u(3);
+    u.push_back({30, 1, 20});
+    u.push_back({21, 11, 19});
+    u.push_back({1, 3, 19});
+    u.push_back({2, 7, 20});
+    u.push_back({3, 11, 3});
+    u.push_back({21, 12, 28});
+
+    u.display();
+
+    reverse(u.begin(), u.end());
+    u.display();
+    auto it = find_if(u.begin(), u.end(), [](const Date &d) { return d.yy == 3; });
+    u.insert(it, {1, 2, 4});
+    cout << "inserted {1,2,4}....\n";
+
+    u.display();
+
+    Date x = {1, 2, 4};
+    u.erase(find_if(u.begin(), u.end(), [&](const Date &d) { return d == x; }));
+
+    u.display();
   }
 }
